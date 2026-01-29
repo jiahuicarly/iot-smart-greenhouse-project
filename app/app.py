@@ -2,6 +2,7 @@ import streamlit as st
 import pickle
 import numpy as np
 import time
+import os
 
 # Page config
 st.set_page_config(
@@ -51,9 +52,15 @@ h3 {
 """, unsafe_allow_html=True)
 
 # Load model, scaler, encoder
-model = pickle.load(open("rf_model.pkl", "rb"))
-scaler = pickle.load(open("scaler.pkl", "rb"))
-le = pickle.load(open("label_encoder.pkl", "rb"))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_PATH = os.path.join(BASE_DIR, "..", "model", "rf_model.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "..", "model", "scaler.pkl")
+ENCODER_PATH = os.path.join(BASE_DIR, "..", "model", "label_encoder.pkl")
+
+model = pickle.load(open(MODEL_PATH, "rb"))
+scaler = pickle.load(open(SCALER_PATH, "rb"))
+le = pickle.load(open(ENCODER_PATH, "rb"))
 
 # Title
 st.markdown("<h1 style='text-align: center;'>🌿 Smart Greenhouse Crop Prediction</h1>", unsafe_allow_html=True)
